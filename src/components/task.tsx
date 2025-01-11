@@ -58,12 +58,18 @@ function TaskTable({ tasks }: { tasks: Array<Task> }) {
           <tr className="hover:bg-slate-50" key={index}>
             <td>{task.title}</td>
             <td>{task.description}</td>
-            <td className="text-left">
-              <img src={statusMap.get(task.status)} width={20} alt="status" />
+            <td>
+              <img
+                className="float-start mr-1"
+                src={statusMap.get(task.status)}
+                width={20}
+                alt="status"
+              />
               {task.status}
             </td>
-            <td className="text-left">
+            <td>
               <img
+                className="float-start mr-1"
                 src={priorityMap.get(task.priority)}
                 width={20}
                 alt="priority"
