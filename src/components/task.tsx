@@ -30,13 +30,13 @@ export function TaskList() {
 }
 
 function TaskTable({ tasks }: { tasks: Array<Task> }) {
-  const statusMap: Map<string, string> = new Map([
-    ["In-Progress", "/status/in-progress.svg"],
+  const statusIconMap: Map<string, string> = new Map([
     ["Todo", "/status/todo.svg"],
+    ["In-Progress", "/status/in-progress.svg"],
     ["Done", "/status/done.svg"],
   ]);
 
-  const priorityMap: Map<string, string> = new Map([
+  const priorityIconMap: Map<string, string> = new Map([
     ["Low", "/priority/low.svg"],
     ["Medium", "/priority/medium.svg"],
     ["High", "/priority/high.svg"],
@@ -50,6 +50,7 @@ function TaskTable({ tasks }: { tasks: Array<Task> }) {
           <td>Description</td>
           <td>Status</td>
           <td>Priority</td>
+          <td>Edit</td>
         </tr>
       </thead>
 
@@ -61,7 +62,7 @@ function TaskTable({ tasks }: { tasks: Array<Task> }) {
             <td>
               <img
                 className="float-start mr-1"
-                src={statusMap.get(task.status)}
+                src={statusIconMap.get(task.status)}
                 width={20}
                 alt="status"
               />
@@ -70,11 +71,16 @@ function TaskTable({ tasks }: { tasks: Array<Task> }) {
             <td>
               <img
                 className="float-start mr-1"
-                src={priorityMap.get(task.priority)}
+                src={priorityIconMap.get(task.priority)}
                 width={20}
                 alt="priority"
               />
               {task.priority}
+            </td>
+            <td>
+              <button>
+                <img src="/edit.svg" alt="edit icon" width={20} />
+              </button>
             </td>
           </tr>
         ))}

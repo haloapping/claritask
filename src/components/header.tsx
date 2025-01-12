@@ -1,4 +1,4 @@
-export function Banner({ username }: { username: string }) {
+export function Header({ username }: { username: string }) {
   return (
     <div className="mb-5 flex justify-between">
       <section>
