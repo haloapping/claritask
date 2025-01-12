@@ -69,7 +69,7 @@ export function NewTaskForm() {
 
         <div className="flex justify-center">
           <button
-            className="rounded-sm border bg-sky-200 px-4 py-1 hover:bg-sky-300"
+            className="rounded-md border bg-sky-200 px-4 py-1 hover:bg-sky-300"
             type="submit"
           >
             Create
