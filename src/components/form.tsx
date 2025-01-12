@@ -2,7 +2,7 @@ import todoIcon from "../../public/status/todo.svg";
 import inProgressIcon from "../../public/status/in-progress.svg";
 import doneIcon from "../../public/status/done.svg";
 
-export function NewTaskForm() {
+export function TaskForm() {
   return (
     <div className="mx-auto mt-7 w-4/12">
       <h1 className="mb-4 text-center text-3xl">Create Your Task</h1>
@@ -10,10 +10,11 @@ export function NewTaskForm() {
         <div className="mb-4 flex flex-col">
           <label htmlFor="title">Title</label>
           <input
-            className="rounded-sm border"
+            className="rounded-sm border px-2"
             id="title"
             name="title"
             type="text"
+            placeholder="Makan Bubur"
             required
           />
         </div>
@@ -21,9 +22,10 @@ export function NewTaskForm() {
         <div className="mb-4 flex flex-col">
           <label htmlFor="description">Description</label>
           <textarea
-            className="resize-none rounded-sm border"
+            className="resize-none rounded-sm border px-2"
             id="description"
             name="description"
+            placeholder="1 Mangkok Bubur Gak Pake Kecap"
             rows={4}
             required
           ></textarea>
@@ -37,7 +39,7 @@ export function NewTaskForm() {
             name="status"
             required
           >
-            <option value="" defaultChecked></option>
+            <option value="-" defaultChecked></option>
             <option value="Todo">
               <img src={todoIcon} alt="todo icon" /> Todo
             </option>
@@ -60,7 +62,7 @@ export function NewTaskForm() {
             name="priority"
             required
           >
-            <option value="" defaultChecked></option>
+            <option value="-" defaultChecked></option>
             <option value="Low">Low</option>
             <option value="Medium">Medium</option>
             <option value="High">High</option>
