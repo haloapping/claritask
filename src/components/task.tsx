@@ -1,32 +1,14 @@
+import { loadTasks } from "../storage/local-storage";
 import { type Task } from "../types/task";
 
 export function TaskList() {
-  const tasks: Array<Task> = [
-    {
-      title: "Jadwal Pagi",
-      description: "Bagi-bagi Susu Ultramilk (Gratis)",
-      status: "In-Progress",
-      priority: "High",
-    },
-    {
-      title: "Jadwal Siang",
-      description: "Makan Siang (Gratis)",
-      status: "Todo",
-      priority: "Low",
-    },
-    {
-      title: "Jadwal Malam",
-      description: "Rapat Persiapan Jan Ethes jadi Presiden",
-      status: "Done",
-      priority: "Medium",
-    },
-  ];
+  const tasks: Array<Task> = loadTasks();
 
-  return (
-    <>
-      <TaskTable tasks={tasks} />
-    </>
-  );
+  if (tasks.length == 0) {
+    return <h1 className="text-center text-xl">Yeah! You're not have task.</h1>;
+  }
+
+  return <TaskTable tasks={tasks} />;
 }
 
 function TaskTable({ tasks }: { tasks: Array<Task> }) {
