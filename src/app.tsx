@@ -1,5 +1,5 @@
 import { Header } from "./components/header";
-import { NewTaskForm } from "./components/form";
+import { TaskForm } from "./components/form";
 import { TaskList } from "./components/task";
 import { Task } from "./types/task";
 import { saveTask } from "./storage/local-storage";
@@ -32,7 +32,7 @@ export function App() {
     <>
       <Header username="FafaFufu" />
       <TaskList />
-      <NewTaskForm />
+      <TaskForm />
     </>
   );
 }
