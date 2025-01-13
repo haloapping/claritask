@@ -2,7 +2,7 @@ export function Header({ username }: { username: string }) {
   return (
     <div className="mb-5 flex justify-between">
       <section>
-        <h1 className="text-2xl">Halo {username}!</h1>
+        <h1 className="text-2xl">Hello {username}!</h1>
         <p className="text-sm">Here's a list of your tasks for this month!</p>
       </section>
 

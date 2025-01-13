@@ -1,17 +1,6 @@
-import { loadTasks } from "../storage/local-storage";
-import { type Task } from "../types/task";
+import { Task } from "../types/task";
 
-export function TaskList() {
-  const tasks: Array<Task> = loadTasks();
-
-  if (tasks.length == 0) {
-    return <h1 className="text-center text-xl">Yeah! You're not have task.</h1>;
-  }
-
-  return <TaskTable tasks={tasks} />;
-}
-
-function TaskTable({ tasks }: { tasks: Array<Task> }) {
+export function TaskTable({ tasks }: { tasks: Array<Task> }) {
   const statusIconMap: Map<string, string> = new Map([
     ["Todo", "/status/todo.svg"],
     ["In-Progress", "/status/in-progress.svg"],

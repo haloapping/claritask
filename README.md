@@ -1,6 +1,4 @@
-# Claritask
-
-## Description
+# KlarinTask
 
 KlarinTask is simple application for manage your (lazy) tasks.
 

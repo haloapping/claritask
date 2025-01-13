@@ -1,11 +1,11 @@
 import { Header } from "./components/header";
 import { TaskForm } from "./components/form";
-import { TaskList } from "./components/task";
+import { TaskList } from "./components/task-list";
 import { Task } from "./types/task";
 import { saveTask } from "./storage/local-storage";
 
 export function App() {
-  const tasks: Array<Task> = [
+  const tasks: Task[] = [
     {
       title: "Jadwal Pagi",
       description: "Bagi-bagi Susu Ultramilk (Gratis)",
