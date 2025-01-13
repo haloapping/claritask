@@ -1,7 +1,3 @@
-import todoIcon from "../../public/status/todo.svg";
-import inProgressIcon from "../../public/status/in-progress.svg";
-import doneIcon from "../../public/status/done.svg";
-
 export function TaskForm() {
   return (
     <div className="mx-auto mt-7 w-4/12">
@@ -41,14 +37,14 @@ export function TaskForm() {
           >
             <option value="-" defaultChecked></option>
             <option value="Todo">
-              <img src={todoIcon} alt="todo icon" /> Todo
+              <img src="/status/todo.svg" alt="todo icon" /> Todo
             </option>
             <option value="In-Progress">
-              <img src={inProgressIcon} alt="in-progress icon" />
+              <img src="/status/in-progress.svg" alt="in-progress icon" />
               In-Progress
             </option>
             <option value="Done">
-              <img src={doneIcon} alt="done icon" />
+              <img src="/status/done.svg" alt="done icon" />
               Done
             </option>
           </select>
