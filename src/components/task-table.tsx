@@ -50,8 +50,12 @@ export function TaskTable({ tasks }: { tasks: Array<Task> }) {
                 {task.priority}
               </td>
               <td>
-                <button>
+                <button className="mr-2">
                   <img src="/edit.svg" alt="edit icon" width={20} />
+                </button>
+
+                <button>
+                  <img src="/delete.svg" alt="delete icon" width={20} />
                 </button>
               </td>
             </tr>
