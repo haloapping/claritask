@@ -1,7 +1,6 @@
 export function TaskForm() {
   return (
-    <div className="mx-auto mt-7 w-4/12">
-      <h1 className="mb-4 text-center text-3xl">Create Your Task</h1>
+    <div className="mx-auto mt-7">
       <form>
         <div className="mb-4 flex flex-col">
           <label htmlFor="title">Title</label>
@@ -63,15 +62,6 @@ export function TaskForm() {
             <option value="Medium">Medium</option>
             <option value="High">High</option>
           </select>
-        </div>
-
-        <div className="flex justify-center">
-          <button
-            className="rounded-md border bg-sky-200 px-4 py-1 hover:bg-sky-300"
-            type="submit"
-          >
-            Create
-          </button>
         </div>
       </form>
     </div>

@@ -1,4 +1,13 @@
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { Task } from "../types/task";
+import { DeleteTaskModal, EditTaskModal } from "./modal";
 
 export function TaskTable({ tasks }: { tasks: Array<Task> }) {
   const statusIconMap: Map<string, string> = new Map([
@@ -15,55 +24,51 @@ export function TaskTable({ tasks }: { tasks: Array<Task> }) {
 
   return (
     <>
-      <table className="w-full table-auto border-collapse border border-slate-400 p-4">
-        <thead className="border-collapse border border-slate-400 font-bold">
-          <tr className="border-collapse border border-slate-400">
-            <td>Title</td>
-            <td>Description</td>
-            <td>Status</td>
-            <td>Priority</td>
-            <td>Edit</td>
-          </tr>
-        </thead>
+      {tasks.length <= 0 && <p>No tasks yet</p>}
 
-        <tbody className="border-collapse border border-slate-400">
-          {tasks.map((task, index) => (
-            <tr className="hover:bg-slate-50" key={index}>
-              <td>{task.title}</td>
-              <td>{task.description}</td>
-              <td>
+      <Table>
+        <TableHeader>
+          <TableRow>
+            <TableHead className="text-center">Title</TableHead>
+            <TableHead className="text-center">Description</TableHead>
+            <TableHead className="text-center">Status</TableHead>
+            <TableHead className="text-center">Priority</TableHead>
+            <TableHead className="text-center">Action</TableHead>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
+          {tasks.map((task) => (
+            <TableRow key={task.id}>
+              <TableCell>{task.title}</TableCell>
+              <TableCell>{task.description}</TableCell>
+              <TableCell>
                 <img
-                  className="float-start mr-1"
                   src={statusIconMap.get(task.status)}
-                  width={20}
-                  alt="status"
+                  alt="status icon"
+                  width={15}
                 />
                 {task.status}
-              </td>
-              <td>
-                <img
-                  className="float-start mr-1"
-                  src={priorityIconMap.get(task.priority)}
-                  width={20}
-                  alt="priority"
-                />
-                {task.priority}
-              </td>
-              <td>
-                <button className="mr-2">
-                  <img src="/edit.svg" alt="edit icon" width={20} />
-                </button>
-
-                <button>
-                  <img src="/delete.svg" alt="delete icon" width={20} />
-                </button>
-              </td>
-            </tr>
+              </TableCell>
+              <TableCell>
+                <div>
+                  <img
+                    src={priorityIconMap.get(task.priority)}
+                    alt="priority icon"
+                    width={15}
+                  />
+                  {task.priority}
+                </div>
+              </TableCell>
+              <TableCell>
+                <div className="flex justify-center gap-2">
+                  <EditTaskModal />
+                  <DeleteTaskModal />
+                </div>
+              </TableCell>
+            </TableRow>
           ))}
-        </tbody>
-      </table>
-
-      {tasks.length <= 0 && <p>No tasks yet</p>}
+        </TableBody>
+      </Table>
     </>
   );
 }
