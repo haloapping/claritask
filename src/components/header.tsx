@@ -1,3 +1,6 @@
+import { Button } from "@/components/ui/button";
+import { PlusIcon } from "lucide-react";
+
 export function Header({ username }: { username: string }) {
   return (
     <div className="mb-5 flex justify-between">
@@ -7,9 +10,9 @@ export function Header({ username }: { username: string }) {
       </section>
 
       <section>
-        <button className="rounded-md border bg-sky-200 px-4 py-1 hover:bg-sky-300">
-          New Task
-        </button>
+        <Button>
+          <PlusIcon /> New Task
+        </Button>
       </section>
     </div>
   );
