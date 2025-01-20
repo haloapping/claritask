@@ -18,7 +18,6 @@ import { useState } from "react";
 
 export function AddTaskModal() {
   const localStorageTasks: Array<Task> = loadTasks();
-  console.log(localStorageTasks);
   const [tasks, setTasks] = useState<Array<Task>>(localStorageTasks);
   const newTask: Task = {
     id: tasks.length + 1,
@@ -68,7 +67,7 @@ export function EditTaskModal() {
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Edit Task</AlertDialogTitle>
+          <AlertDialogTitle className="text-center">Edit Task</AlertDialogTitle>
           <AlertDialogDescription>
             <TaskForm />
           </AlertDialogDescription>
@@ -92,11 +91,9 @@ export function DeleteTaskModal() {
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you sure to delete task?</AlertDialogTitle>
-          <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
-          </AlertDialogDescription>
+          <AlertDialogTitle className="text-center">
+            Are you sure to delete task?
+          </AlertDialogTitle>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>

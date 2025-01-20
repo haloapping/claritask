@@ -1,4 +1,5 @@
-import { AddTaskModal } from "./modal";
+import { PlusIcon } from "lucide-react";
+import { Button } from "./ui/button";
 
 export function Header({ username }: { username: string }) {
   return (
@@ -9,7 +10,13 @@ export function Header({ username }: { username: string }) {
       </section>
 
       <section>
-        <AddTaskModal />
+        <Button
+          onClick={() => {
+            console.log("Hello");
+          }}
+        >
+          <PlusIcon /> New Task
+        </Button>
       </section>
     </div>
   );
