@@ -9,10 +9,10 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { TaskForm } from "./form";
+import { TaskForm } from "./task-form";
 import { PencilIcon, PlusIcon, Trash2Icon } from "lucide-react";
 import { Button, buttonVariants } from "./ui/button";
-import { Task } from "@/types/task";
+import { type Task } from "@/types/task";
 import { loadTasks, saveTask } from "@/storage/local-storage";
 import { useState } from "react";
 
@@ -81,7 +81,13 @@ export function EditTaskModal() {
   );
 }
 
-export function DeleteTaskModal() {
+export function DeleteTaskModal({
+  task,
+  handleDeleteTask,
+}: {
+  task: Task;
+  handleDeleteTask: (id: number) => void;
+}) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -99,6 +105,7 @@ export function DeleteTaskModal() {
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction
             className={buttonVariants({ variant: "destructive" })}
+            onClick={() => handleDeleteTask(task.id)}
           >
             Delete
           </AlertDialogAction>

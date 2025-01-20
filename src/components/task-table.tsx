@@ -8,48 +8,48 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Task } from "../types/task";
-import { DeleteTaskModal, EditTaskModal } from "./modal";
+import { DeleteTaskModal, EditTaskModal } from "./task-modal";
 import { useState } from "react";
 import { Button } from "./ui/button";
 import { PlusIcon } from "lucide-react";
 
+const statusIconMap: Map<string, string> = new Map([
+  ["Todo", "/status/todo.svg"],
+  ["In-Progress", "/status/in-progress.svg"],
+  ["Done", "/status/done.svg"],
+]);
+
+const priorityIconMap: Map<string, string> = new Map([
+  ["Low", "/priority/low.svg"],
+  ["Medium", "/priority/medium.svg"],
+  ["High", "/priority/high.svg"],
+]);
+
+const initialTasks: Array<Task> = [
+  {
+    id: 1,
+    title: "Jadwal Pagi",
+    description: "Bagi-bagi Susu Ultramilk (Gratis)",
+    status: "In-Progress",
+    priority: "High",
+  },
+  {
+    id: 2,
+    title: "Jadwal Siang",
+    description: "Makan Siang (Gratis)",
+    status: "Todo",
+    priority: "Low",
+  },
+  {
+    id: 3,
+    title: "Jadwal Malam",
+    description: "Rapat Persiapan Jan Ethes jadi Presiden",
+    status: "Done",
+    priority: "Medium",
+  },
+];
+
 export function TaskTable() {
-  const statusIconMap: Map<string, string> = new Map([
-    ["Todo", "/status/todo.svg"],
-    ["In-Progress", "/status/in-progress.svg"],
-    ["Done", "/status/done.svg"],
-  ]);
-
-  const priorityIconMap: Map<string, string> = new Map([
-    ["Low", "/priority/low.svg"],
-    ["Medium", "/priority/medium.svg"],
-    ["High", "/priority/high.svg"],
-  ]);
-
-  const initialTasks: Array<Task> = [
-    {
-      id: 1,
-      title: "Jadwal Pagi",
-      description: "Bagi-bagi Susu Ultramilk (Gratis)",
-      status: "In-Progress",
-      priority: "High",
-    },
-    {
-      id: 2,
-      title: "Jadwal Siang",
-      description: "Makan Siang (Gratis)",
-      status: "Todo",
-      priority: "Low",
-    },
-    {
-      id: 3,
-      title: "Jadwal Malam",
-      description: "Rapat Persiapan Jan Ethes jadi Presiden",
-      status: "Done",
-      priority: "Medium",
-    },
-  ];
-
   const [tasks, setTasks] = useState<Array<Task>>(initialTasks);
 
   const newTask: Task = {
@@ -60,6 +60,16 @@ export function TaskTable() {
     priority: "Medium",
   };
 
+  function handleAddNewTask() {
+    setTasks([...tasks, newTask]);
+  }
+
+  function handleDeleteTask(id: number) {
+    console.log({ id });
+
+    // setTasks([...tasks, newTask]);
+  }
+
   return (
     <>
       <div className="mb-5 flex justify-between">
@@ -69,20 +79,15 @@ export function TaskTable() {
         </section>
 
         <section>
-          <Button
-            onClick={() => {
-              setTasks([...tasks, newTask]);
-            }}
-          >
+          <Button onClick={handleAddNewTask}>
             <PlusIcon /> New Task
           </Button>
         </section>
       </div>
 
       <Table>
-        {tasks.length <= 0 ? (
-          <TableCaption>No tasks yet.</TableCaption>
-        ) : (
+        {tasks.length <= 0 && <TableCaption>No tasks yet.</TableCaption>}
+        {tasks.length > 0 && (
           <>
             <TableHeader>
               <TableRow>
@@ -119,7 +124,10 @@ export function TaskTable() {
                   <TableCell>
                     <div className="flex justify-center gap-2">
                       <EditTaskModal />
-                      <DeleteTaskModal />
+                      <DeleteTaskModal
+                        task={task}
+                        handleDeleteTask={handleDeleteTask}
+                      />
                     </div>
                   </TableCell>
                 </TableRow>
