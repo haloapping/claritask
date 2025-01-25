@@ -1,43 +1,53 @@
+import { useState } from "react";
+import { Header } from "./components/header";
 import { TaskTable } from "./components/task-table";
-import { Avatar, AvatarFallback, AvatarImage } from "./components/ui/avatar";
+import { Task } from "./types/task";
+import { Footer } from "./components/footer";
 
 export function App() {
+  const initialTasks: Array<Task> = [
+    {
+      id: 1,
+      title: "Jadwal Pagi",
+      description: "Bagi-bagi Susu Ultramilk (Gratis)",
+      status: "In-Progress",
+      priority: "High",
+      createdAt: new Date().toLocaleString(),
+      updatedAt: null,
+    },
+    {
+      id: 2,
+      title: "Jadwal Siang",
+      description: "Makan Siang (Gratis)",
+      status: "Todo",
+      priority: "Low",
+      createdAt: new Date().toLocaleString(),
+      updatedAt: null,
+    },
+    {
+      id: 3,
+      title: "Jadwal Malam",
+      description: "Rapat Persiapan Jan Ethes jadi Presiden",
+      status: "Done",
+      priority: "Medium",
+      createdAt: new Date().toLocaleString(),
+      updatedAt: null,
+    },
+  ];
+
+  const [tasks, setTasks] = useState<Array<Task>>(initialTasks);
   return (
     <>
-      <header className="mx-auto mb-5 mt-10 flex w-3/5 justify-between">
-        <section className="flex items-center justify-between gap-1">
-          <a href="">
-            <img src="/logo.svg" alt="logo" width={30} />
-          </a>
-          <a href="/">
-            <h1>KlarinTask</h1>
-          </a>
-        </section>
-
-        <section className="flex items-center justify-between gap-1">
-          <Avatar>
-            <AvatarImage src="/user-avatar.jpg" alt="avatar" />
-            <AvatarFallback>FU</AvatarFallback>
-          </Avatar>
-
-          <p>FafaFufu</p>
-        </section>
+      <header className="mx-auto mb-5 mt-10 w-3/5">
+        <Header username={"Fufufafa"} tasks={tasks} setTasks={setTasks} />
       </header>
 
       <main className="m-auto w-3/5">
-        <TaskTable />
+        <TaskTable tasks={tasks} setTasks={setTasks} />
       </main>
 
       <footer className="m-auto mt-4 w-3/5">
-        <p className="text-center">
-          @klarintask by{" "}
-          <a
-            className="font-medium hover:underline"
-            href="https://haloapping.com"
-          >
-            haloapping
-          </a>
-        </p>
+        <Footer />
       </footer>
     </>
   );
