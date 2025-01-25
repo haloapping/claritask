@@ -164,7 +164,7 @@ export function EditTaskModal({ id, tasks, setTasks }: EditDialogProps) {
   function handleEditTask(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    const taskFormData: FormData = new FormData(event.currentTarget);
+    // const taskFormData: FormData = new FormData(event.currentTarget);
 
     setTasks(tasks);
   }
