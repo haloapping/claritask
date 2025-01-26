@@ -1,5 +1,7 @@
 import { Task } from "@/types/task";
 import { PlusIcon, Trash2Icon } from "lucide-react";
+import { ChangeEvent, useState } from "react";
+import { z } from "zod";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -56,6 +58,20 @@ export function AddTaskDialog({ tasks, setTasks }: AddTaskDialogProps) {
     event.preventDefault();
 
     const taskFormData = new FormData(event.currentTarget);
+    const taskValues = Object.fromEntries(taskFormData);
+
+    const taskSchema = z.object({
+      title: z.number(),
+      description: z.string(),
+      status: z.string(),
+      priority: z.string(),
+    });
+
+    const result = taskSchema.safeParse(taskValues);
+    if (!result.success) {
+      console.log(result.error);
+    }
+
     const newTask: Task = {
       id: tasks.length + 1,
       title: taskFormData.get("title")?.toString(),
@@ -164,10 +180,30 @@ export function EditTaskModal({ id, tasks, setTasks }: EditDialogProps) {
   function handleEditTask(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    // const taskFormData: FormData = new FormData(event.currentTarget);
-
     setTasks(tasks);
   }
+
+  const [taskFormData, setTaskFormData] = useState<Task>({
+    id: 0,
+    title: "",
+    description: "",
+    status: "",
+    priority: "",
+    createdAt: "",
+    updatedAt: "",
+  });
+
+  console.log(taskFormData);
+
+  const handleChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
+    const { name, value } = event.currentTarget;
+    setTaskFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
 
   const taskById: Task | undefined = tasks.find((task) => task.id === id);
 
@@ -194,6 +230,7 @@ export function EditTaskModal({ id, tasks, setTasks }: EditDialogProps) {
                 id="title"
                 name="title"
                 value={taskById?.title}
+                onChange={handleChange}
                 placeholder="Title"
                 className="col-span-3"
                 required
@@ -208,6 +245,7 @@ export function EditTaskModal({ id, tasks, setTasks }: EditDialogProps) {
                 id="description"
                 name="description"
                 value={taskById?.description}
+                onChange={handleChange}
                 placeholder="Description"
                 className="col-span-3"
                 rows={5}

@@ -36,6 +36,7 @@ export function App() {
   ];
 
   const [tasks, setTasks] = useState<Array<Task>>(initialTasks);
+
   return (
     <>
       <header className="mx-auto mb-5 mt-10 w-3/5">
