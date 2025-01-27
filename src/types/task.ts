@@ -10,8 +10,8 @@ export const formTaskSchema = z.object({
 
 export const taskSchema = formTaskSchema.extend({
   id: z.number(),
-  createdAt: z.date(),
-  updatedAt: z.date().nullable(),
+  createdAt: z.string(),
+  updatedAt: z.string().nullable(),
 });
 
 export type Task = z.infer<typeof taskSchema>;

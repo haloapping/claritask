@@ -55,7 +55,7 @@ export function AddTaskDialog({ tasks, setTasks }: AddTaskDialogProps) {
       description: result.data.description,
       status: result.data.status,
       priority: result.data.priority,
-      createdAt: new Date(),
+      createdAt: new Date().toLocaleDateString(),
       updatedAt: null,
     };
 
