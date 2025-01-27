@@ -1,6 +1,6 @@
 import { Task } from "@/types/task";
-import { AddTaskDialog } from "./dialog";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { AddTaskDialog } from "@/components/tasks/add-task";
 
 type HeaderProps = {
   username: string;

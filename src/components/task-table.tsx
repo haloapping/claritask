@@ -7,8 +7,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Task } from "../types/task";
-import { DeleteTaskDialog, EditTaskModal } from "./dialog";
+import { Task } from "@/types/task";
+import { EditTaskModal } from "@/components/tasks/edit-task";
+import { DeleteTaskDialog } from "@/components/tasks/delete-task";
 
 type TaskTableProps = {
   tasks: Array<Task>;
