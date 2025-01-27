@@ -1,8 +1,9 @@
+// import { randomUUIDv7 } from "bun";
 import { useState } from "react";
+import { Footer } from "./components/footer";
 import { Header } from "./components/header";
 import { TaskTable } from "./components/task-table";
 import { Task } from "./types/task";
-import { Footer } from "./components/footer";
 
 export function App() {
   const initialTasks: Array<Task> = [
