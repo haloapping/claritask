@@ -1,7 +1,6 @@
-import { Task } from "@/types/task";
+import { Task, formTaskSchema } from "@/types/task";
 import { PlusIcon } from "lucide-react";
 import { useState } from "react";
-import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -33,6 +32,8 @@ type AddTaskDialogProps = {
 };
 
 export function AddTaskDialog({ tasks, setTasks }: AddTaskDialogProps) {
+  // TODO: Override close dialog behavior so if there's required input error
+  // the dialog wouldn't be closed
   const [open, setOpen] = useState(false);
 
   function handleSubmitAddTask(event: React.FormEvent<HTMLFormElement>) {
@@ -40,27 +41,21 @@ export function AddTaskDialog({ tasks, setTasks }: AddTaskDialogProps) {
 
     const taskFormData = new FormData(event.currentTarget);
     const taskValues = Object.fromEntries(taskFormData);
+    const result = formTaskSchema.safeParse(taskValues);
 
-    const taskSchema = z.object({
-      title: z.number(),
-      description: z.string(),
-      status: z.string(),
-      priority: z.string(),
-    });
-
-    const result = taskSchema.safeParse(taskValues);
-    if (!result.success) {
+    if (!result.success || !result.data) {
       setOpen(false);
       console.log(result.error);
+      return null;
     }
 
     const newTask: Task = {
       id: tasks.length + 1,
-      title: taskFormData.get("title")?.toString(),
-      description: taskFormData.get("description")?.toString(),
-      status: taskFormData.get("status")?.toString(),
-      priority: taskFormData.get("priority")?.toString(),
-      createdAt: new Date().toLocaleString(),
+      title: result.data.title,
+      description: result.data.description,
+      status: result.data.status,
+      priority: result.data.priority,
+      createdAt: new Date(),
       updatedAt: null,
     };
 
@@ -92,7 +87,7 @@ export function AddTaskDialog({ tasks, setTasks }: AddTaskDialogProps) {
                 name="title"
                 placeholder="Title"
                 className="col-span-3"
-                required={true}
+                required
               />
             </div>
 
@@ -106,7 +101,7 @@ export function AddTaskDialog({ tasks, setTasks }: AddTaskDialogProps) {
                 placeholder="Description"
                 className="col-span-3"
                 rows={5}
-                required={true}
+                required
               />
             </div>
 

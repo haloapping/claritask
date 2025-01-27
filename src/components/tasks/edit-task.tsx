@@ -1,6 +1,5 @@
-import { Task } from "@/types/task";
+import { Task, formTaskSchema } from "@/types/task";
 import { PlusIcon } from "lucide-react";
-import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -33,28 +32,42 @@ type EditDialogProps = {
 };
 
 export function EditTaskModal({ id, tasks, setTasks }: EditDialogProps) {
+  const task: Task | undefined = tasks.find((task) => task.id === id);
+
   function handleSubmitEditTask(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    setTasks(tasks);
+    const taskFormData = new FormData(event.currentTarget);
+    const taskValues = Object.fromEntries(taskFormData);
+    const result = formTaskSchema.safeParse(taskValues);
+
+    if (!task || !result.success || !result.data) {
+      console.log(result.error);
+      return null;
+    }
+
+    const updatedTask: Task = {
+      id: task.id,
+      title: result.data.title,
+      description: result.data.description,
+      status: result.data.status,
+      priority: result.data.priority,
+      createdAt: new Date(),
+      updatedAt: null,
+    };
+
+    const updatedTasks = tasks.map((task) => {
+      if (task.id === updatedTask.id) {
+        return updatedTask;
+      } else {
+        return task;
+      }
+    });
+
+    setTasks(updatedTasks);
   }
 
-  const [taskFormData, setTaskFormData] = useState({
-    title: "",
-    description: "",
-    status: "",
-    priority: "",
-  });
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.currentTarget;
-    setTaskFormData({
-      ...taskFormData,
-      [name]: value,
-    });
-  };
-
-  const taskById: Task | undefined = tasks.find((task) => task.id === id);
+  if (!task) return null;
 
   return (
     <Dialog>
@@ -78,8 +91,7 @@ export function EditTaskModal({ id, tasks, setTasks }: EditDialogProps) {
               <Input
                 id="title"
                 name="title"
-                value={taskById?.title}
-                onChange={handleInputChange}
+                defaultValue={task.title}
                 placeholder="Title"
                 className="col-span-3"
                 required
@@ -93,8 +105,7 @@ export function EditTaskModal({ id, tasks, setTasks }: EditDialogProps) {
               <Textarea
                 id="description"
                 name="description"
-                value={taskById?.description}
-                // onChange={handleInputChange}
+                defaultValue={task.description}
                 placeholder="Description"
                 className="col-span-3"
                 rows={5}
@@ -106,7 +117,7 @@ export function EditTaskModal({ id, tasks, setTasks }: EditDialogProps) {
               <Label htmlFor="status" className="text-right">
                 Status
               </Label>
-              <Select name="status" required value={taskById?.status}>
+              <Select name="status" required defaultValue={task.status}>
                 <SelectTrigger id="status" className="w-[180px]">
                   <SelectValue placeholder="Select status" />
                 </SelectTrigger>
@@ -125,7 +136,7 @@ export function EditTaskModal({ id, tasks, setTasks }: EditDialogProps) {
               <Label htmlFor="priority" className="text-right">
                 Priority
               </Label>
-              <Select name="priority" required value={taskById?.priority}>
+              <Select name="priority" required defaultValue={task.priority}>
                 <SelectTrigger id="priority" className="w-[180px]">
                   <SelectValue placeholder="Select priority" />
                 </SelectTrigger>

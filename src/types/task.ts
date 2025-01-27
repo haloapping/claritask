@@ -1,9 +1,19 @@
-export type Task = {
-  id: number | undefined;
-  title: string | undefined;
-  description: string | undefined;
-  status: string | undefined;
-  priority: string | undefined;
-  createdAt: string | null;
-  updatedAt: string | null;
-};
+import { z } from "zod";
+
+// Can be used for add and edit
+export const formTaskSchema = z.object({
+  title: z.string(),
+  description: z.string(),
+  status: z.string(),
+  priority: z.string(),
+});
+
+export const taskSchema = formTaskSchema.extend({
+  id: z.number(),
+  createdAt: z.date(),
+  updatedAt: z.date().nullable(),
+});
+
+export type Task = z.infer<typeof taskSchema>;
+
+export type FormTask = z.infer<typeof formTaskSchema>;

@@ -9,6 +9,11 @@ import { initialTasks } from "@/data/initial-tasks";
 export function App() {
   const [tasks, setTasks] = useState<Array<Task>>(initialTasks);
 
+  // TODO: Centralize features
+  // function addTasks(formData) {
+  //   setTasks([]);
+  // }
+
   return (
     <>
       <header className="mx-auto mb-5 mt-10 w-3/5">
