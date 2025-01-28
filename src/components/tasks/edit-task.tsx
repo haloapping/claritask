@@ -4,7 +4,6 @@ import { PlusIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -24,6 +23,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { useState } from "react";
 
 type EditDialogProps = {
   id: number | undefined;
@@ -33,6 +33,7 @@ type EditDialogProps = {
 
 export function EditTaskModal({ id, tasks, setTasks }: EditDialogProps) {
   const task: Task | undefined = tasks.find((task) => task.id === id);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   function handleSubmitEditTask(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -65,12 +66,13 @@ export function EditTaskModal({ id, tasks, setTasks }: EditDialogProps) {
     });
 
     setTasks(updatedTasks);
+    setIsOpen(false);
   }
 
   if (!task) return null;
 
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button variant="outline">
           <PlusIcon /> Edit Task
@@ -152,9 +154,7 @@ export function EditTaskModal({ id, tasks, setTasks }: EditDialogProps) {
             </div>
           </div>
           <DialogFooter>
-            <DialogClose asChild>
-              <Button type="submit">Edit Task</Button>
-            </DialogClose>
+            <Button type="submit">Edit Task</Button>
           </DialogFooter>
         </form>
       </DialogContent>

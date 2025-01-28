@@ -5,7 +5,6 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -32,9 +31,7 @@ type AddTaskDialogProps = {
 };
 
 export function AddTaskDialog({ tasks, setTasks }: AddTaskDialogProps) {
-  // TODO: Override close dialog behavior so if there's required input error
-  // the dialog wouldn't be closed
-  const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   function handleSubmitAddTask(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -44,10 +41,11 @@ export function AddTaskDialog({ tasks, setTasks }: AddTaskDialogProps) {
     const result = formTaskSchema.safeParse(taskValues);
 
     if (!result.success || !result.data) {
-      setOpen(false);
       console.log(result.error);
       return null;
     }
+
+    console.log(result.data);
 
     const newTask: Task = {
       id: tasks.length + 1,
@@ -60,10 +58,11 @@ export function AddTaskDialog({ tasks, setTasks }: AddTaskDialogProps) {
     };
 
     setTasks([...tasks, newTask]);
+    setIsOpen(false);
   }
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
         <Button variant="outline">
           <PlusIcon /> Add Task
@@ -144,9 +143,7 @@ export function AddTaskDialog({ tasks, setTasks }: AddTaskDialogProps) {
             </div>
           </div>
           <DialogFooter>
-            <DialogClose asChild>
-              <Button type="submit">Add Task</Button>
-            </DialogClose>
+            <Button type="submit">Add Task</Button>
           </DialogFooter>
         </form>
       </DialogContent>
