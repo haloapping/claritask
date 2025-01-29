@@ -1,4 +1,4 @@
-export function About() {
+export function AboutRoute() {
   return (
     <main className="mx-auto mb-5 mt-10 w-3/5 flex-1">
       <h1 className="mb-4 text-2xl">KlarinTask</h1>
