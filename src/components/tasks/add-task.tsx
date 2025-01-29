@@ -108,7 +108,7 @@ export function AddTaskDialog({ tasks, setTasks }: AddTaskDialogProps) {
               <Label htmlFor="status" className="text-right">
                 Status
               </Label>
-              <Select name="status" required>
+              <Select name="status" required defaultValue="Todo">
                 <SelectTrigger id="status" className="w-[180px]">
                   <SelectValue placeholder="Select status" />
                 </SelectTrigger>
@@ -127,7 +127,7 @@ export function AddTaskDialog({ tasks, setTasks }: AddTaskDialogProps) {
               <Label htmlFor="priority" className="text-right">
                 Priority
               </Label>
-              <Select name="priority" required>
+              <Select name="priority" required defaultValue="Low">
                 <SelectTrigger id="priority" className="w-[180px]">
                   <SelectValue placeholder="Select priority" />
                 </SelectTrigger>

@@ -10,6 +10,8 @@ import {
 import { Task } from "@/types/task";
 import { EditTaskModal } from "@/components/tasks/edit-task";
 import { DeleteTaskDialog } from "@/components/tasks/delete-task";
+import { Button } from "../ui/button";
+import { Link } from "react-router";
 
 type TaskTableProps = {
   tasks: Array<Task>;
@@ -70,6 +72,10 @@ export function TaskTable({ tasks, setTasks }: TaskTableProps) {
                   </TableCell>
                   <TableCell>
                     <div className="flex justify-center gap-2">
+                      <Button asChild>
+                        <Link to={`/tasks/${task.id}`}>View</Link>
+                      </Button>
+
                       <EditTaskModal
                         id={task.id}
                         tasks={tasks}
