@@ -1,6 +1,7 @@
-import { Task } from "@/types/task";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { AddTaskDialog } from "@/components/tasks/add-task";
+import { Task } from "@/types/task";
+import { NavLink } from "react-router";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 type HeaderProps = {
   username: string;
@@ -8,7 +9,7 @@ type HeaderProps = {
   setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
 };
 
-export function Header({ username, tasks, setTasks }: HeaderProps) {
+export function Header() {
   return (
     <div className="flex flex-col">
       <div className="alig mb-5 flex justify-between">
@@ -22,6 +23,25 @@ export function Header({ username, tasks, setTasks }: HeaderProps) {
         </section>
 
         <section className="flex items-center justify-between gap-1">
+          <nav className="mr-8 flex gap-4">
+            <NavLink
+              to={"/"}
+              className={({ isActive }) =>
+                isActive ? "font-bold" : "hover:underline"
+              }
+            >
+              Home
+            </NavLink>
+            <NavLink
+              to={"/about"}
+              className={({ isActive }) =>
+                isActive ? "font-bold" : "hover:underline"
+              }
+            >
+              About
+            </NavLink>
+          </nav>
+
           <Avatar>
             <AvatarImage src="/user-avatar.jpg" alt="avatar" />
             <AvatarFallback>FU</AvatarFallback>
@@ -30,8 +50,14 @@ export function Header({ username, tasks, setTasks }: HeaderProps) {
           <p>FafaFufu</p>
         </section>
       </div>
+    </div>
+  );
+}
 
-      <div className="mb-5 flex justify-between">
+export function HeaderBody({ username, tasks, setTasks }: HeaderProps) {
+  return (
+    <div>
+      <div className="mb-5 flex items-center justify-between">
         <section>
           <h1 className="text-2xl">Hello {username}!</h1>
           <p className="text-sm">Here's a list of your tasks for this month!</p>
