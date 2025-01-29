@@ -1,12 +1,13 @@
 import { Header } from "@/components/layout/header";
 import { TaskTable } from "@/components/tasks/task-table";
-import { initialTasks } from "@/data/initial-tasks";
 import { Task } from "@/types/task";
-import { useState } from "react";
 
-export function IndexRoute() {
-  const [tasks, setTasks] = useState<Array<Task>>(initialTasks);
+type IndexRouteProps = {
+  tasks: Array<Task>;
+  setTasks: React.Dispatch<React.SetStateAction<Array<Task>>>;
+};
 
+export function IndexRoute({ tasks, setTasks }: IndexRouteProps) {
   // TODO: Centralize features
   // function addTasks(formData) {
   //   setTasks([]);
