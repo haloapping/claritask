@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/table";
 import { Task } from "@/types/task";
 import { ChartNoAxesGanttIcon } from "lucide-react";
-import { useNavigate } from "react-router";
+import { Link } from "react-router";
 import { Button } from "../ui/button";
 
 type TaskTableProps = {
@@ -31,8 +31,6 @@ export function TaskTable({ tasks, setTasks }: TaskTableProps) {
     ["Medium", "/priority/medium.svg"],
     ["High", "/priority/high.svg"],
   ]);
-
-  const viewNavigate = useNavigate();
 
   return (
     <>
@@ -75,9 +73,11 @@ export function TaskTable({ tasks, setTasks }: TaskTableProps) {
                   </TableCell>
                   <TableCell>
                     <div className="flex justify-center gap-2">
-                      <Button onClick={() => viewNavigate(`/tasks/${task.id}`)}>
-                        <ChartNoAxesGanttIcon />
-                        View
+                      <Button asChild>
+                        <Link to={`/tasks/${task.id}`}>
+                          <ChartNoAxesGanttIcon />
+                          View
+                        </Link>
                       </Button>
 
                       <EditTaskModal
