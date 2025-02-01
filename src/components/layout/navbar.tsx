@@ -1,4 +1,4 @@
-import { NavLink } from "react-router";
+import { Link, NavLink } from "react-router";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 export function NavBar() {
@@ -7,12 +7,12 @@ export function NavBar() {
       <div className="flex flex-col">
         <div className="alig mb-5 flex justify-between">
           <section className="flex items-center justify-between gap-1">
-            <a href="">
+            <Link to="/">
               <img src="/logo.svg" alt="logo" width={30} />
-            </a>
-            <a href="/">
+            </Link>
+            <Link to="/">
               <h1>KlarinTask</h1>
-            </a>
+            </Link>
           </section>
 
           <section className="flex items-center justify-between gap-1">
