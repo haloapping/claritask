@@ -1,6 +1,6 @@
 export function Footer() {
   return (
-    <footer className="mx-auto mb-5 mt-10 w-3/5">
+    <footer className="mb-5 mt-10 w-full max-w-4xl">
       <p className="text-center">
         @klarintask by{" "}
         <a

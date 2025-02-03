@@ -78,7 +78,7 @@ export function EditTaskDialog({ id, tasks, setTasks }: EditDialogProps) {
           <PlusIcon /> Edit Task
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Edit Task</DialogTitle>
           <DialogDescription>Make a task today.</DialogDescription>

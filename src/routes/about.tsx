@@ -1,6 +1,6 @@
 export function AboutRoute() {
   return (
-    <main className="mx-auto mb-5 mt-10 w-3/5 flex-1">
+    <main className="mb-5 mt-10 w-full max-w-4xl flex-1">
       <h1 className="mb-4 text-2xl">KlarinTask</h1>
       <p className="mb-4">
         Tired of juggling endless to-do lists and feeling overwhelmed? Meet

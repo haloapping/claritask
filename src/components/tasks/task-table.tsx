@@ -52,11 +52,11 @@ export function TaskTable({ tasks, setTasks }: TaskTableProps) {
           <>
             <TableHeader>
               <TableRow>
-                <TableHead className="text-center">Title</TableHead>
-                <TableHead className="text-center">Description</TableHead>
-                <TableHead className="text-center">Status</TableHead>
-                <TableHead className="text-center">Priority</TableHead>
-                <TableHead className="text-center">Action</TableHead>
+                <TableHead>Title</TableHead>
+                <TableHead>Description</TableHead>
+                <TableHead>Status</TableHead>
+                <TableHead>Priority</TableHead>
+                <TableHead className="text-right">Action</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -77,7 +77,7 @@ export function TaskTable({ tasks, setTasks }: TaskTableProps) {
                     </Badge>
                   </TableCell>
                   <TableCell>
-                    <div className="flex justify-center gap-2">
+                    <div className="flex justify-end gap-2">
                       <Button asChild>
                         <Link to={`/tasks/${task.id}`}>
                           <ChartNoAxesGanttIcon />

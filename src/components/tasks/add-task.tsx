@@ -69,7 +69,7 @@ export function AddTaskDialog({ tasks, setTasks }: AddTaskDialogProps) {
         </Button>
       </DialogTrigger>
 
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>Add Task</DialogTitle>
           <DialogDescription>Make a task today.</DialogDescription>

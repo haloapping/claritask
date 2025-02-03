@@ -8,14 +8,9 @@ type IndexRouteProps = {
 };
 
 export function IndexRoute({ tasks, setTasks }: IndexRouteProps) {
-  // TODO: Centralize features
-  // function addTasks(formData) {
-  //   setTasks([]);
-  // }
-
   return (
-    <div className="flex-1">
-      <main className="m-auto w-3/5">
+    <div className="flex w-full flex-1 justify-center">
+      <main className="w-full max-w-4xl">
         <Header username="Fufufafa" tasks={tasks} setTasks={setTasks} />
         <TaskTable tasks={tasks} setTasks={setTasks} />
       </main>
