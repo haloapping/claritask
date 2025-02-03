@@ -31,7 +31,7 @@ type EditDialogProps = {
   setTasks: React.Dispatch<React.SetStateAction<Task[]>>;
 };
 
-export function EditTaskModal({ id, tasks, setTasks }: EditDialogProps) {
+export function EditTaskDialog({ id, tasks, setTasks }: EditDialogProps) {
   const task: Task | undefined = tasks.find((task) => task.id === id);
   const [isOpen, setIsOpen] = useState<boolean>(false);
 

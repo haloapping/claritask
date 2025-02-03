@@ -1,5 +1,5 @@
 import { DeleteTaskDialog } from "@/components/tasks/delete-task";
-import { EditTaskModal } from "@/components/tasks/edit-task";
+import { EditTaskDialog } from "@/components/tasks/edit-task";
 import {
   Table,
   TableBody,
@@ -13,6 +13,7 @@ import { Task } from "@/types/task";
 import { ChartNoAxesGanttIcon } from "lucide-react";
 import { Link } from "react-router";
 import { Button } from "../ui/button";
+import { Search } from "./search-tasks";
 
 type TaskTableProps = {
   tasks: Array<Task>;
@@ -34,6 +35,7 @@ export function TaskTable({ tasks, setTasks }: TaskTableProps) {
 
   return (
     <>
+      <Search tasks={tasks} setTasks={setTasks} />
       <Table>
         {tasks.length <= 0 ? (
           <TableCaption>No tasks yet.</TableCaption>
@@ -80,7 +82,7 @@ export function TaskTable({ tasks, setTasks }: TaskTableProps) {
                         </Link>
                       </Button>
 
-                      <EditTaskModal
+                      <EditTaskDialog
                         id={task.id}
                         tasks={tasks}
                         setTasks={setTasks}
