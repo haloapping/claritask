@@ -1,5 +1,9 @@
 import { Task } from "@/types/task";
 import { useParams } from "react-router";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+
+dayjs.extend(relativeTime);
 
 type TaskRouteProps = {
   tasks: Array<Task>;
@@ -29,6 +33,18 @@ export function TaskRoute({ tasks }: TaskRouteProps) {
         <p>
           <span className="font-semibold">Priority: </span>
           <span className="font-medium text-red-500">{task?.priority}</span>
+        </p>
+        <p>
+          <span className="font-semibold">Created At: </span>
+          <span className="font-medium text-red-500">
+            {dayjs(task?.createdAt).fromNow()}
+          </span>
+        </p>
+        <p>
+          <span className="font-semibold">Updated At: </span>
+          <span className="font-medium text-red-500">
+            {dayjs(task?.updatedAt).fromNow() || "null"}
+          </span>
         </p>
       </div>
     </div>
