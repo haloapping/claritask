@@ -2,16 +2,15 @@ import { Task } from "@/types/task";
 import { useParams } from "react-router";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { loadTasks } from "@/storage/local-storage";
 
 dayjs.extend(relativeTime);
 
-type TaskRouteProps = {
-  tasks: Array<Task>;
-};
-
-export function TaskRoute({ tasks }: TaskRouteProps) {
+export function TaskRoute() {
   const { id } = useParams();
   if (!id) return null;
+
+  const tasks = loadTasks();
 
   const task: Task | undefined = tasks.find((task) => task.id === Number(id));
 

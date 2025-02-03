@@ -21,7 +21,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router";
 import { Button } from "@/components/ui/button";
-import { Search } from "@/components/tasks/search-tasks";
+import { SearchTasksForm } from "@/components/tasks/search-tasks-form";
 import { Badge } from "@/components/ui/badge";
 
 type TaskTableProps = {
@@ -44,7 +44,7 @@ export function TaskTable({ tasks, setTasks }: TaskTableProps) {
 
   return (
     <>
-      <Search tasks={tasks} setTasks={setTasks} />
+      <SearchTasksForm tasks={tasks} setTasks={setTasks} />
       <Table>
         {tasks.length <= 0 ? (
           <TableCaption>No tasks yet.</TableCaption>
