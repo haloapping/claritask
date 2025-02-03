@@ -10,10 +10,19 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Task } from "@/types/task";
-import { ChartNoAxesGanttIcon } from "lucide-react";
+import {
+  ChartNoAxesGanttIcon,
+  ChevronDownIcon,
+  ChevronsDownUpIcon,
+  ChevronUpIcon,
+  CircleCheckBigIcon,
+  CircleDashedIcon,
+  CircleIcon,
+} from "lucide-react";
 import { Link } from "react-router";
-import { Button } from "../ui/button";
-import { Search } from "./search-tasks";
+import { Button } from "@/components/ui/button";
+import { Search } from "@/components/tasks/search-tasks";
+import { Badge } from "@/components/ui/badge";
 
 type TaskTableProps = {
   tasks: Array<Task>;
@@ -21,16 +30,16 @@ type TaskTableProps = {
 };
 
 export function TaskTable({ tasks, setTasks }: TaskTableProps) {
-  const statusIconMap: Map<string | undefined, string> = new Map([
-    ["Todo", "/status/todo.svg"],
-    ["In-Progress", "/status/in-progress.svg"],
-    ["Done", "/status/done.svg"],
+  const statusIconMap: Map<string | undefined, React.ReactNode> = new Map([
+    ["Todo", <CircleDashedIcon className="size-3" />],
+    ["In-Progress", <CircleIcon className="size-3" />],
+    ["Done", <CircleCheckBigIcon className="size-3" />],
   ]);
 
-  const priorityIconMap: Map<string | undefined, string> = new Map([
-    ["Low", "/priority/low.svg"],
-    ["Medium", "/priority/medium.svg"],
-    ["High", "/priority/high.svg"],
+  const priorityIconMap: Map<string | undefined, React.ReactNode> = new Map([
+    ["Low", <ChevronDownIcon className="size-3" />],
+    ["Medium", <ChevronsDownUpIcon className="size-3" />],
+    ["High", <ChevronUpIcon className="size-3" />],
   ]);
 
   return (
@@ -56,22 +65,16 @@ export function TaskTable({ tasks, setTasks }: TaskTableProps) {
                   <TableCell>{task.title}</TableCell>
                   <TableCell>{task.description}</TableCell>
                   <TableCell>
-                    <img
-                      src={statusIconMap.get(task.status)}
-                      alt="status icon"
-                      width={15}
-                    />
-                    {task.status}
+                    <Badge variant="secondary">
+                      {statusIconMap.get(task.status)}
+                      <p>{task.status}</p>
+                    </Badge>
                   </TableCell>
                   <TableCell>
-                    <div>
-                      <img
-                        src={priorityIconMap.get(task.priority)}
-                        alt="priority icon"
-                        width={15}
-                      />
-                      {task.priority}
-                    </div>
+                    <Badge variant="secondary">
+                      {priorityIconMap.get(task.priority)}
+                      <p>{task.priority}</p>
+                    </Badge>
                   </TableCell>
                   <TableCell>
                     <div className="flex justify-center gap-2">
